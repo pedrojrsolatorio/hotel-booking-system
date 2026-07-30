@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         // Example admin account
         User::factory()->create([
             'name' => 'Hotel Admin',
-            'email' => 'admin@hotel.test',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
             'role' => 'admin',
         ]);
@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         // Example customer account
         User::factory()->create([
             'name' => 'Jane Customer',
-            'email' => 'customer@hotel.test',
+            'email' => 'customer@gmail.com',
             'password' => bcrypt('password'),
             'role' => 'customer',
         ]);
