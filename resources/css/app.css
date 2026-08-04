@@ -1,3 +1,56 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.key-tag {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e7e0d2;
+    border-radius: 14px;
+    transition:
+        transform 240ms ease,
+        box-shadow 240ms ease;
+}
+
+.key-tag:hover {
+    transform: rotate(-1deg) translateY(-2px);
+    box-shadow: 0 18px 30px -18px rgba(27, 46, 40, 0.35);
+}
+
+/* The grommet: a brass ring with an ivory "hole" punched through it,
+   evoking the metal eyelet on a physical hotel room-key fob. */
+.key-tag__grommet {
+    position: absolute;
+    top: -14px;
+    left: 28px;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    background: #b08d57;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(27, 46, 40, 0.25);
+}
+
+.key-tag__grommet::after {
+    content: "";
+    width: 11px;
+    height: 11px;
+    border-radius: 9999px;
+    background: #f7f3ea;
+}
+
+.ledger-number {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .key-tag {
+        transition: none;
+    }
+    .key-tag:hover {
+        transform: none;
+    }
+}
