@@ -15,6 +15,10 @@ export default function AdminRoomsIndex({
 }) {
     const { props } = usePage<{ flash?: { success?: string } }>();
 
+    console.log("rooms:", rooms);
+    console.log("rooms.links:", rooms.links);
+    console.log("rooms.meta:", rooms.meta);
+
     const destroy = (room: Room) => {
         if (confirm(`Delete "${room.name}"? This can't be undone.`)) {
             router.delete(route("admin.rooms.destroy", room.id));
@@ -124,9 +128,11 @@ export default function AdminRoomsIndex({
                 </table>
             </div>
 
-            {rooms.links && (
+            {/* {rooms.links && ( */}
+            {rooms.meta?.links && (
                 <div className="mt-6 flex flex-wrap gap-2">
-                    {rooms.links.map((link, i) => (
+                    {/* {rooms.links.map((link, i) => ( */}
+                    {rooms.meta.links.map((link, i) => (
                         <Link
                             key={i}
                             href={link.url ?? "#"}
