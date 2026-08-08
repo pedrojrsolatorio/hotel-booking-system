@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\RoomController as AdminRoomController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -26,6 +27,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
 Route::get('/rooms/{room:slug}', [RoomController::class, 'show'])->name('rooms.show');
+
+/*
+|--------------------------------------------------------------------------
+| AI booking assistant — open to guests and customers alike, session-scoped
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/chat', [ChatController::class, 'store'])->name('chat.send');
+Route::get('/chat/history', [ChatController::class, 'history'])->name('chat.history');
 
 /*
 |--------------------------------------------------------------------------
