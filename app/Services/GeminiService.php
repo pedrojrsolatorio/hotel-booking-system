@@ -139,9 +139,29 @@ class GeminiService
 
     private function callGemini(array $contents): array
     {
+        // $response = Http::timeout(20)
+        //     ->withHeaders(['Content-Type' => 'application/json'])
+        //     ->post("{$this->baseUrl}/{$this->model}:generateContent?key={$this->apiKey}", [
+        //         'system_instruction' => [
+        //             'parts' => [['text' => $this->systemPrompt()]],
+        //         ],
+        //         'contents' => $contents,
+        //         'tools' => [
+        //             ['function_declarations' => [$this->availabilityFunctionSchema()]],
+        //         ],
+        //         'generationConfig' => [
+        //             'temperature' => 0.4,
+        //             'maxOutputTokens' => 400,
+        //         ],
+        //     ])
+        //     ->throw();
+
+        // return $response->json();
+
+        // Code rabbit suggestion:
         $response = Http::timeout(20)
-            ->withHeaders(['Content-Type' => 'application/json'])
-            ->post("{$this->baseUrl}/{$this->model}:generateContent?key={$this->apiKey}", [
+            ->withHeaders(['Content-Type' => 'application/json', 'x-goog-api-key' => $this->apiKey,])
+            ->post("{$this->baseUrl}/{$this->model}:generateContent", [
                 'system_instruction' => [
                     'parts' => [['text' => $this->systemPrompt()]],
                 ],
