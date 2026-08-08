@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import type { Auth } from "@/types/models";
+import ChatWidget from "@/Components/ChatWidget";
 
 export default function PublicLayout({ children }: PropsWithChildren) {
     const { auth } = usePage().props as unknown as { auth: Auth };
@@ -158,6 +159,8 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                     </p>
                 </div>
             </footer>
+
+            <ChatWidget />
         </div>
     );
 }
