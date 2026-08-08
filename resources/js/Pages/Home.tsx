@@ -45,6 +45,7 @@ export default function Home({ featuredRooms }: { featuredRooms: Room[] }) {
 
             {/* Hero */}
             <section className="relative overflow-hidden bg-ink">
+                {/* <section className="relative bg-ink"> */}
                 <div className="absolute inset-0 opacity-30">
                     <img
                         src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=2000&auto=format&fit=crop"
@@ -70,10 +71,17 @@ export default function Home({ featuredRooms }: { featuredRooms: Room[] }) {
                     </p>
                 </div>
 
-                <div className="relative mx-auto -mb-20 max-w-5xl px-6 lg:px-8">
+                {/* <div className="relative mx-auto -mb-20 max-w-5xl px-6 lg:px-8">
                     <RoomSearchForm />
-                </div>
+                </div> */}
+                {/* <div className="relative mx-auto max-w-5xl px-6 pb-5 pt-2 lg:px-8">
+                    <RoomSearchForm />
+                </div> */}
             </section>
+
+            <div className="relative mx-auto -mt-10 max-w-5xl px-6 lg:px-8">
+                <RoomSearchForm />
+            </div>
 
             <div className="h-20" />
 

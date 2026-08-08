@@ -54,8 +54,28 @@ export interface RoomFilters {
 
 export interface PaginatedData<T> {
     data: T[];
-    links: { url: string | null; label: string; active: boolean }[];
-    meta?: { current_page: number; last_page: number; total: number };
+    // links: { url: string | null; label: string; active: boolean }[];
+    // meta?: { current_page: number; last_page: number; total: number };
+    links: {
+        first: string | null;
+        last: string | null;
+        prev: string | null;
+        next: string | null;
+    };
+    meta?: {
+        current_page: number;
+        from: number | null;
+        last_page: number;
+        path: string;
+        per_page: number;
+        to: number | null;
+        total: number;
+        links: {
+            url: string | null;
+            label: string;
+            active: boolean;
+        }[];
+    };
 }
 
 export interface Auth {
