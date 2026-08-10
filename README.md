@@ -1,58 +1,219 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Verity House — Hotel Booking Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack, portfolio-ready hotel booking platform built with **Laravel 12, Inertia.js, React, and TypeScript**, with a Gemini-powered AI booking assistant.
 
-## About Laravel
+## Quick start
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Requirements
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- Docker Desktop
+- Git
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Clone the repository:
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repository-url>
+cd hotel-booking-platform
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Install the PHP dependencies using Laravel Sail:
 
-## Contributing
+```bash
+./vendor/bin/sail composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Copy the environment file:
 
-## Code of Conduct
+```bash
+cp .env.example .env
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Generate the application key:
 
-## Security Vulnerabilities
+```bash
+./vendor/bin/sail artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Start the Docker environment:
 
-## License
+```bash
+./vendor/bin/sail up -d
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Install frontend dependencies:
+
+```bash
+./vendor/bin/sail npm install
+```
+
+Run migrations and seed the database:
+
+```bash
+./vendor/bin/sail artisan migrate:fresh --seed
+```
+
+Create the storage symlink:
+
+```bash
+./vendor/bin/sail artisan storage:link
+```
+
+The application should now be available at:
+
+```text
+http://localhost
+```
+
+Run the Vite development server:
+
+```bash
+./vendor/bin/sail npm run dev
+```
+
+### Environment configuration
+
+For local email/queue testing:
+
+```env
+MAIL_MAILER=log
+QUEUE_CONNECTION=sync
+```
+
+To enable the Gemini-powered booking assistant:
+
+```env
+GEMINI_API_KEY=your_api_key
+```
+
+The chatbot degrades gracefully when no Gemini API key is configured.
+
+### Seeded accounts
+
+**Admin**
+
+```text
+Email: admin@gmail.com
+Password: password
+```
+
+**Customer**
+
+```text
+Email: customer@gmail.com
+Password: password
+```
+
+## Common Sail commands
+
+Start the application:
+
+```bash
+./vendor/bin/sail up -d
+```
+
+Stop the application:
+
+```bash
+./vendor/bin/sail down
+```
+
+View application logs:
+
+```bash
+./vendor/bin/sail logs -f
+```
+
+Run Artisan commands:
+
+```bash
+./vendor/bin/sail artisan <command>
+```
+
+Run Composer:
+
+```bash
+./vendor/bin/sail composer <command>
+```
+
+Run npm commands:
+
+```bash
+./vendor/bin/sail npm <command>
+```
+
+Run tests:
+
+```bash
+./vendor/bin/sail artisan test
+```
+
+## Project structure
+
+```text
+app/
+  Console/Commands/     SendCheckInReminders
+  Events/               BookingCreated, BookingCancelled
+  Exceptions/           RoomUnavailableException
+  Http/Controllers/     Public + Auth controllers
+    Admin/              Dashboard, Rooms, Bookings, Users
+    Api/                ChatController
+  Http/Requests/         Form validation per action
+  Http/Resources/       RoomResource, RoomImageResource, BookingResource
+  Listeners/            Email listeners for booking events
+  Mail/                 BookingConfirmed, BookingCancelled, BookingReminder
+  Models/                User, Room, RoomImage, Booking, Payment, Faq, Chat*
+  Policies/             RoomPolicy, BookingPolicy
+  Services/             RoomService, BookingService, GeminiService
+
+database/
+  migrations/
+  factories/
+  seeders/
+
+resources/
+  css/app.css           Brand tokens, key-tag component, animations
+  js/Components/        RoomCard, RoomSearchForm, ChatWidget, Admin/RoomForm
+  js/Layouts/           PublicLayout, AdminLayout
+  js/Pages/              Home, Rooms/*, Bookings/*, Admin/*
+  views/emails/         Branded transactional email templates
+  views/errors/         Branded 404/403 pages
+
+routes/
+  web.php               All routes
+  console.php            Scheduled check-in reminders
+```
+
+## API / route reference
+
+### Public
+
+| Method | URI                         | Description                  |
+| ------ | --------------------------- | ---------------------------- |
+| GET    | `/`                         | Homepage with featured rooms |
+| GET    | `/rooms`                    | Room listing with filters    |
+| GET    | `/rooms/{room:slug}`        | Room details + booking form  |
+| POST   | `/chat`                     | Send a chatbot message       |
+| GET    | `/chat/history?session_id=` | Restore chat history         |
+
+### Authenticated customer
+
+| Method           | URI                          | Description           |
+| ---------------- | ---------------------------- | --------------------- |
+| GET              | `/dashboard`                 | Customer landing page |
+| GET/PATCH/DELETE | `/profile`                   | Profile management    |
+| GET              | `/bookings`                  | My bookings           |
+| POST             | `/bookings`                  | Create a booking      |
+| GET              | `/bookings/{booking}`        | Booking details       |
+| PATCH            | `/bookings/{booking}/cancel` | Cancel a booking      |
+
+### Admin
+
+| Method                | URI                                | Description                |
+| --------------------- | ---------------------------------- | -------------------------- |
+| GET                   | `/admin/dashboard`                 | Stats + charts             |
+| GET/POST/PATCH/DELETE | `/admin/rooms...`                  | Room CRUD                  |
+| GET                   | `/admin/bookings`                  | Search/filter bookings     |
+| PATCH                 | `/admin/bookings/{booking}/status` | Change booking status      |
+| DELETE                | `/admin/bookings/{booking}`        | Remove a booking           |
+| GET                   | `/admin/users`                     | Search users               |
+| PATCH                 | `/admin/users/{user}/role`         | Toggle admin/customer role |

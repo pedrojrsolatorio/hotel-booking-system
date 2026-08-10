@@ -54,17 +54,23 @@ export default function Home({ featuredRooms }: { featuredRooms: Room[] }) {
                     />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-6 pb-32 pt-24 lg:px-8">
-                    <p className="text-xs uppercase tracking-[0.3em] text-brass">
+                    <p className="text-xs uppercase tracking-[0.3em] text-brass animate-fade-in-up">
                         Est. a house, not a chain
                     </p>
-                    <h1 className="mt-6 max-w-2xl font-display text-5xl font-medium leading-[1.05] text-ivory lg:text-6xl">
+                    <h1
+                        className="mt-6 max-w-2xl font-display text-5xl font-medium leading-[1.05] text-ivory lg:text-6xl animate-fade-in-up"
+                        style={{ animationDelay: "80ms" }}
+                    >
                         Rooms kept the way a good house should be —
                         <span className="italic text-brass">
                             {" "}
                             plainly, and well.
                         </span>
                     </h1>
-                    <p className="mt-6 max-w-lg text-ivory/70">
+                    <p
+                        className="mt-6 max-w-lg text-ivory/70 animate-fade-in-up"
+                        style={{ animationDelay: "160ms" }}
+                    >
                         Twelve rooms, four suites, one library bar. No loyalty
                         points, no upsells at check-in — just a reservation you
                         can trust and a bed worth the trip.
@@ -105,9 +111,16 @@ export default function Home({ featuredRooms }: { featuredRooms: Room[] }) {
                 </div>
 
                 <div className="mt-10 grid gap-8 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {featuredRooms.map((room) => (
-                        <RoomCard key={room.id} room={room} />
-                    ))}
+                    {featuredRooms.length === 0 ? (
+                        <p className="col-span-full py-12 text-center text-sage">
+                            Rooms are being prepared — check back shortly, or
+                            browse all rooms directly.
+                        </p>
+                    ) : (
+                        featuredRooms.map((room) => (
+                            <RoomCard key={room.id} room={room} />
+                        ))
+                    )}
                 </div>
             </section>
 
