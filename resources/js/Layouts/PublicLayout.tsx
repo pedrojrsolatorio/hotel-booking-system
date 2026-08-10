@@ -1,10 +1,11 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useState } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import type { Auth } from "@/types/models";
 import ChatWidget from "@/Components/ChatWidget";
 
 export default function PublicLayout({ children }: PropsWithChildren) {
     const { auth } = usePage().props as unknown as { auth: Auth };
+    const [menuOpen, setMenuOpen] = useState(false);
 
     return (
         <div className="min-h-screen bg-ivory font-sans text-charcoal">
@@ -74,8 +75,63 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                                 </Link>
                             </>
                         )}
+
+                        <button
+                            onClick={() => setMenuOpen((v) => !v)}
+                            className="ml-1 flex h-9 w-9 items-center justify-center rounded-md border border-hairline text-ink md:hidden"
+                            aria-label="Toggle menu"
+                            aria-expanded={menuOpen}
+                        >
+                            <span className="sr-only">Menu</span>
+                            {menuOpen ? "✕" : "☰"}
+                        </button>
                     </div>
                 </nav>
+
+                {menuOpen && (
+                    <div className="border-t border-hairline bg-ivory px-6 py-4 md:hidden">
+                        <div className="flex flex-col gap-3 text-sm">
+                            <Link
+                                href={route("rooms.index")}
+                                onClick={() => setMenuOpen(false)}
+                                className="text-charcoal/80 hover:text-brass"
+                            >
+                                Rooms &amp; Suites
+                            </Link>
+                            <a
+                                href="#amenities"
+                                onClick={() => setMenuOpen(false)}
+                                className="text-charcoal/80 hover:text-brass"
+                            >
+                                Amenities
+                            </a>
+                            <a
+                                href="#faq"
+                                onClick={() => setMenuOpen(false)}
+                                className="text-charcoal/80 hover:text-brass"
+                            >
+                                FAQ
+                            </a>
+                            {auth.user ? (
+                                <Link
+                                    href={route("bookings.index")}
+                                    onClick={() => setMenuOpen(false)}
+                                    className="text-charcoal/80 hover:text-brass"
+                                >
+                                    My Bookings
+                                </Link>
+                            ) : (
+                                <Link
+                                    href={route("login")}
+                                    onClick={() => setMenuOpen(false)}
+                                    className="text-charcoal/80 hover:text-brass"
+                                >
+                                    Sign in
+                                </Link>
+                            )}
+                        </div>
+                    </div>
+                )}
             </header>
 
             <main>{children}</main>
