@@ -105,9 +105,16 @@ export default function Home({ featuredRooms }: { featuredRooms: Room[] }) {
                 </div>
 
                 <div className="mt-10 grid gap-8 pt-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {featuredRooms.map((room) => (
-                        <RoomCard key={room.id} room={room} />
-                    ))}
+                    {featuredRooms.length === 0 ? (
+                        <p className="col-span-full py-12 text-center text-sage">
+                            Rooms are being prepared — check back shortly, or
+                            browse all rooms directly.
+                        </p>
+                    ) : (
+                        featuredRooms.map((room) => (
+                            <RoomCard key={room.id} room={room} />
+                        ))
+                    )}
                 </div>
             </section>
 
