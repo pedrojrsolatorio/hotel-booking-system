@@ -54,17 +54,23 @@ export default function Home({ featuredRooms }: { featuredRooms: Room[] }) {
                     />
                 </div>
                 <div className="relative mx-auto max-w-7xl px-6 pb-32 pt-24 lg:px-8">
-                    <p className="text-xs uppercase tracking-[0.3em] text-brass">
+                    <p className="text-xs uppercase tracking-[0.3em] text-brass animate-fade-in-up">
                         Est. a house, not a chain
                     </p>
-                    <h1 className="mt-6 max-w-2xl font-display text-5xl font-medium leading-[1.05] text-ivory lg:text-6xl">
+                    <h1
+                        className="mt-6 max-w-2xl font-display text-5xl font-medium leading-[1.05] text-ivory lg:text-6xl animate-fade-in-up"
+                        style={{ animationDelay: "80ms" }}
+                    >
                         Rooms kept the way a good house should be —
                         <span className="italic text-brass">
                             {" "}
                             plainly, and well.
                         </span>
                     </h1>
-                    <p className="mt-6 max-w-lg text-ivory/70">
+                    <p
+                        className="mt-6 max-w-lg text-ivory/70 animate-fade-in-up"
+                        style={{ animationDelay: "160ms" }}
+                    >
                         Twelve rooms, four suites, one library bar. No loyalty
                         points, no upsells at check-in — just a reservation you
                         can trust and a bed worth the trip.
