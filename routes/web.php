@@ -4,8 +4,10 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\RoomController as AdminRoomController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\AmenitiesController;
 use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
@@ -27,6 +29,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
 Route::get('/rooms/{room:slug}', [RoomController::class, 'show'])->name('rooms.show');
+Route::get('/amenities', [AmenitiesController::class, 'index'])->name('amenities.index');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 /*
 |--------------------------------------------------------------------------

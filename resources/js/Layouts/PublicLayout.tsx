@@ -25,18 +25,18 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                         >
                             Rooms &amp; Suites
                         </Link>
-                        <a
-                            href="#amenities"
+                        <Link
+                            href={route("amenities.index")}
                             className="text-charcoal/80 transition hover:text-brass"
                         >
                             Amenities
-                        </a>
-                        <a
-                            href="#faq"
+                        </Link>
+                        <Link
+                            href={route("faq.index")}
                             className="text-charcoal/80 transition hover:text-brass"
                         >
                             FAQ
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -98,20 +98,20 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                             >
                                 Rooms &amp; Suites
                             </Link>
-                            <a
-                                href="#amenities"
+                            <Link
+                                href={route("amenities.index")}
                                 onClick={() => setMenuOpen(false)}
                                 className="text-charcoal/80 hover:text-brass"
                             >
                                 Amenities
-                            </a>
-                            <a
-                                href="#faq"
+                            </Link>
+                            <Link
+                                href={route("faq.index")}
                                 onClick={() => setMenuOpen(false)}
                                 className="text-charcoal/80 hover:text-brass"
                             >
                                 FAQ
-                            </a>
+                            </Link>
                             {auth.user ? (
                                 <Link
                                     href={route("bookings.index")}
@@ -162,17 +162,20 @@ export default function PublicLayout({ children }: PropsWithChildren) {
                                     </Link>
                                 </li>
                                 <li>
-                                    <a
-                                        href="#amenities"
+                                    <Link
+                                        href={route("amenities.index")}
                                         className="hover:text-ivory"
                                     >
                                         Amenities
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="#faq" className="hover:text-ivory">
+                                    <Link
+                                        href={route("faq.index")}
+                                        className="hover:text-ivory"
+                                    >
                                         FAQ
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>

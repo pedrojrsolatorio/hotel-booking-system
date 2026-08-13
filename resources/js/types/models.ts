@@ -44,6 +44,14 @@ export interface Booking {
     created_at?: string;
 }
 
+export interface Faq {
+    id: number;
+    question: string;
+    answer: string;
+    category: string | null;
+    sort_order: number;
+}
+
 export interface RoomFilters {
     check_in?: string;
     check_out?: string;

@@ -1,27 +1,10 @@
 import { Head, Link } from "@inertiajs/react";
 import PublicLayout from "@/Layouts/PublicLayout";
+import AmenitiesGrid from "@/Components/AmenitiesGrid";
 import RoomSearchForm from "@/Components/RoomSearchForm";
 import RoomCard from "@/Components/RoomCard";
+import { HOTEL_AMENITIES } from "@/data/amenities";
 import type { Room } from "@/types/models";
-
-const AMENITIES = [
-    {
-        title: "Library Bar",
-        copy: "A quiet room of old books and older whisky, open past midnight.",
-    },
-    {
-        title: "Garden Terrace",
-        copy: "Breakfast among the olive trees, weather permitting — and it usually does.",
-    },
-    {
-        title: "Bath House",
-        copy: "Steam, cedar, and a plunge pool kept two degrees colder than you\u2019d like.",
-    },
-    {
-        title: "Concierge Desk",
-        copy: "Reservations, recommendations, and the occasional impossible favor.",
-    },
-];
 
 const TESTIMONIALS = [
     {
@@ -134,20 +117,15 @@ export default function Home({ featuredRooms }: { featuredRooms: Room[] }) {
                         A few things worth knowing about
                     </h2>
 
-                    <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-                        {AMENITIES.map((a) => (
-                            <div
-                                key={a.title}
-                                className="border-t border-hairline pt-5"
-                            >
-                                <h3 className="font-display text-lg text-ink">
-                                    {a.title}
-                                </h3>
-                                <p className="mt-2 text-sm text-charcoal/70">
-                                    {a.copy}
-                                </p>
-                            </div>
-                        ))}
+                    <AmenitiesGrid amenities={HOTEL_AMENITIES} />
+
+                    <div className="mt-10 text-center">
+                        <Link
+                            href={route("amenities.index")}
+                            className="text-sm text-ink underline decoration-brass underline-offset-4"
+                        >
+                            View all amenities
+                        </Link>
                     </div>
                 </div>
             </section>
